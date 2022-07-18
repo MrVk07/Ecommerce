@@ -46,7 +46,6 @@ function ProductScreen() {
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data })
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: util(err) })
-        // console.log(err)
       }
     }
     fetchData()
