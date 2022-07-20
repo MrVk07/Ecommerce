@@ -73,43 +73,39 @@ function ProductScreen() {
     loading ? (<LoadingBox />) :
       error ? (<MessageBox variant="danger">{error}</MessageBox>) :
         <div>
+          <Helmet>
+            <title>{product.name}</title>
+          </Helmet>
           <Row>
             <Col md={6}>
               <img className='img-large' src={`.${product.image}`} alt={product.name} />
             </Col>
-            <Col md={3}>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <Helmet>
-                    <title>{product.name}</title>
-                  </Helmet>
-                </ListGroup.Item>
-
-                <ListGroup.Item>
-                  <Rating rating={product.rating} numsReviews={product.numReviews}></Rating>
-                </ListGroup.Item>
-
-                <ListGroup.Item>
-                  Price:${product.price}
-                </ListGroup.Item>
-
-                <ListGroup.Item>
-                  Description
-                  <p>{product.desc}</p>
-                </ListGroup.Item>
-              </ListGroup>
-            </Col>
-            <Col md={3}>
-              <Card>
-                <Card.Body>
+            <Col md={6}>
+              <Card bg="danger">
+                <Card.Body style={{ border: "1px solid black" }}>
                   <ListGroup variant="flush">
-                    <ListGroup.Item>
+                    <ListGroup.Item variant='danger'>
+                      <h1>{product.name}</h1>
+                    </ListGroup.Item>
+                    <ListGroup.Item variant='danger'>
                       <Row>
-                        <Col>Price:</Col>
-                        <Col>${product.price}</Col>
+                        <Col>Review:</Col>
+                        <Col><b><Rating rating={product.rating} numReviews={product.numReviews}></Rating></b></Col>
                       </Row>
                     </ListGroup.Item>
-                    <ListGroup.Item>
+                    <ListGroup.Item variant="danger">
+                      <Row>
+                        <Col>Description:</Col>
+                        <Col><b>{product.desc}</b></Col>
+                      </Row>
+                    </ListGroup.Item>
+                    <ListGroup.Item variant="danger">
+                      <Row>
+                        <Col>Price:</Col>
+                        <Col><b>${product.price}</b></Col>
+                      </Row>
+                    </ListGroup.Item>
+                    <ListGroup.Item variant="danger">
                       <Row>
                         <Col>Status:</Col>
                         <Col>{product.countInStock !== ((cart.cartItems.find((x) => x._id === product._id)) ? (cart.cartItems.find((x) => x._id === product._id)).quantity : 1) ?
@@ -119,9 +115,9 @@ function ProductScreen() {
                       </Row>
                     </ListGroup.Item>
                     {product.countInStock !== ((cart.cartItems.find((x) => x._id === product._id)) ? (cart.cartItems.find((x) => x._id === product._id)).quantity : 1) ? (
-                      <ListGroupItem>
+                      <ListGroupItem variant="danger">
                         <div className="d-grid">
-                          <Button onClick={addToCartHandler} variant="primary">Add to Cart</Button>
+                          <Button onClick={addToCartHandler} variant="danger"><b>Add to Cart</b></Button>
                         </div>
                       </ListGroupItem>) :
                       <Button variant='light' disabled>Out of stock</Button>
@@ -132,7 +128,7 @@ function ProductScreen() {
               </Card>
             </Col>
           </Row>
-        </div>
+        </div >
   )
 }
 

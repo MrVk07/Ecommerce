@@ -90,35 +90,35 @@ export default function PlaceOrderScreen() {
             <h1 className="my-3">Preview Order</h1>
             <Row>
                 <Col md={8}>
-                    <Card className="mb-3">
+                    <Card style={{ backgroundColor: "#F8D7DA" }}>
                         <Card.Body>
-                            <Card.Title>Shipping</Card.Title>
+                            <Card.Title><b>Shipping</b></Card.Title>
                             <Card.Text>
                                 <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
                                 <strong>Address: </strong> {cart.shippingAddress.address},
                                 {cart.shippingAddress.city}, {cart.shippingAddress.postalCode},
                                 {cart.shippingAddress.country}
                             </Card.Text>
-                            <Link to="/shipping">Edit</Link>
+                            <Link to="/shipping" style={{ textDecoration: 'none' }}>Edit</Link>
                         </Card.Body>
                     </Card>
 
-                    <Card className="mb-3">
+                    <Card className="mb-3" style={{ backgroundColor: "#F8D7DA" }}>
                         <Card.Body>
-                            <Card.Title>Payment</Card.Title>
+                            <Card.Title><b>Payment</b></Card.Title>
                             <Card.Text>
                                 <strong>Method:</strong> {cart.paymentMethod}
                             </Card.Text>
-                            <Link to="/payment">Edit</Link>
+                            <Link to="/payment" style={{ textDecoration: 'none' }}>Edit</Link>
                         </Card.Body>
                     </Card>
 
-                    <Card className="mb-3">
+                    <Card className="mb-3" style={{ backgroundColor: "#F8D7DA" }}>
                         <Card.Body>
-                            <Card.Title>Items</Card.Title>
+                            <Card.Title><b>Items</b></Card.Title>
                             <ListGroup variant="flush">
                                 {cart.cartItems.map((item) => (
-                                    <ListGroup.Item key={item._id}>
+                                    <ListGroup.Item key={item._id} style={{ backgroundColor: "#F8D7DA" }}>
                                         <Row className="align-items-center">
                                             <Col md={6}>
                                                 <img
@@ -126,61 +126,56 @@ export default function PlaceOrderScreen() {
                                                     alt={item.name}
                                                     className="img-fluid rounded img-thumbnail"
                                                 ></img>{' '}
-                                                <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                                                <Link to={`/product/${item.slug}`} style={{ textDecoration: 'none', color: "black" }}><b>{item.name}</b></Link>
                                             </Col>
                                             <Col md={3}>
-                                                <span>{item.quantity}</span>
+                                                <span><b>{item.quantity}</b></span>
                                             </Col>
-                                            <Col md={3}>${item.price}</Col>
+                                            <Col md={3}><b>${item.price}</b></Col>
                                         </Row>
                                     </ListGroup.Item>
                                 ))}
                             </ListGroup>
-                            <Link to="/cart">Edit</Link>
+                            <Link to="/cart" style={{ textDecoration: 'none' }}>Edit</Link>
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col md={4}>
-                    <Card>
+                    <Card style={{ backgroundColor: "#F8D7DA" }}>
                         <Card.Body>
-                            <Card.Title>Order Summary</Card.Title>
+                            <Card.Title className='text-center'><b>Order Summary</b></Card.Title>
                             <ListGroup variant="flush">
-                                <ListGroup.Item>
+                                <ListGroup.Item variant='danger'>
                                     <Row>
-                                        <Col>Items</Col>
+                                        <Col><b>Items</b></Col>
                                         <Col>${cart.itemsPrice.toFixed(2)}</Col>
                                     </Row>
                                 </ListGroup.Item>
-                                <ListGroup.Item>
+                                <ListGroup.Item variant='danger'>
                                     <Row>
-                                        <Col>Shipping</Col>
+                                        <Col><b>Shipping</b></Col>
                                         <Col>${cart.shippingPrice.toFixed(2)}</Col>
                                     </Row>
                                 </ListGroup.Item>
-                                <ListGroup.Item>
+                                <ListGroup.Item variant='danger'>
                                     <Row>
-                                        <Col>Tax</Col>
+                                        <Col><b>Tax</b></Col>
                                         <Col>${cart.taxPrice.toFixed(2)}</Col>
                                     </Row>
                                 </ListGroup.Item>
-                                <ListGroup.Item>
+                                <ListGroup.Item variant='danger'>
                                     <Row>
                                         <Col>
-                                            <strong> Order Total</strong>
+                                            <b>Order Total</b>
                                         </Col>
                                         <Col>
-                                            <strong>${cart.totalPrice.toFixed(2)}</strong>
+                                            ${cart.totalPrice.toFixed(2)}
                                         </Col>
                                     </Row>
                                 </ListGroup.Item>
-                                <ListGroup.Item>
+                                <ListGroup.Item variant='danger'>
                                     <div className="d-grid">
-                                        <Button
-                                            type="button"
-                                            onClick={placeOrderHandler}
-                                            disabled={cart.cartItems.length === 0}>
-                                            Place Order
-                                        </Button>
+                                        <Button variant='danger' type="button" onClick={placeOrderHandler} disabled={cart.cartItems.length === 0}><b>Place Order</b></Button>
                                     </div>
                                     {loading && <LoadingBox></LoadingBox>}
                                 </ListGroup.Item>
@@ -189,6 +184,6 @@ export default function PlaceOrderScreen() {
                     </Card>
                 </Col>
             </Row>
-        </div>
+        </div >
     );
 }

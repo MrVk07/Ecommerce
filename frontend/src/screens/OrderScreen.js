@@ -72,9 +72,9 @@ export default function OrderScreen() {
                     <h1 className="my-3">Order {orderId}</h1>
                     <Row>
                         <Col md={8}>
-                            <Card className="mb-3">
+                            <Card className="mb-3" style={{ backgroundColor: "#F8D7DA" }}>
                                 <Card.Body>
-                                    <Card.Title>Shipping</Card.Title>
+                                    <Card.Title><b>Shipping</b></Card.Title>
                                     <Card.Text>
                                         <strong>Name:</strong> {order.shippingAddress.fullName} <br />
                                         <strong>Address: </strong> {order.shippingAddress.address},
@@ -86,13 +86,13 @@ export default function OrderScreen() {
                                             Delivered at {order.deliveredAt}
                                         </MessageBox>
                                     ) : (
-                                        <MessageBox variant="danger">Not Delivered</MessageBox>
+                                        <MessageBox variant="primary">Not Delivered</MessageBox>
                                     )}
                                 </Card.Body>
                             </Card>
-                            <Card className="mb-3">
+                            <Card className="mb-3" style={{ backgroundColor: "#F8D7DA" }}>
                                 <Card.Body>
-                                    <Card.Title>Payment</Card.Title>
+                                    <Card.Title><b>Payment</b></Card.Title>
                                     <Card.Text>
                                         <strong>Method:</strong> {order.paymentMethod}
                                     </Card.Text>
@@ -106,12 +106,12 @@ export default function OrderScreen() {
                                 </Card.Body>
                             </Card>
 
-                            <Card className="mb-3">
+                            <Card className="mb-3" style={{ backgroundColor: "#F8D7DA" }}>
                                 <Card.Body>
-                                    <Card.Title>Items</Card.Title>
+                                    <Card.Title><b>Items</b></Card.Title>
                                     <ListGroup variant="flush">
                                         {order.orderItems.map((item) => (
-                                            <ListGroup.Item key={item._id}>
+                                            <ListGroup.Item key={item._id} style={{ backgroundColor: "#F8D7DA" }}>
                                                 <Row className="align-items-center">
                                                     <Col md={6}>
                                                         <img
@@ -119,12 +119,12 @@ export default function OrderScreen() {
                                                             alt={item.name}
                                                             className="img-fluid rounded img-thumbnail"
                                                         ></img>{' '}
-                                                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                                                        <Link to={`/product/${item.slug}`} style={{ textDecoration: 'none', color: "black" }}><b>{item.name}</b></Link>
                                                     </Col>
                                                     <Col md={3}>
-                                                        <span>{item.quantity}</span>
+                                                        <span><b>{item.quantity}</b></span>
                                                     </Col>
-                                                    <Col md={3}>${item.price}</Col>
+                                                    <Col md={3}><b>${item.price}</b></Col>
                                                 </Row>
                                             </ListGroup.Item>
                                         ))}
@@ -133,32 +133,32 @@ export default function OrderScreen() {
                             </Card>
                         </Col>
                         <Col md={4}>
-                            <Card className="mb-3">
+                            <Card className="mb-3" style={{ backgroundColor: "#F8D7DA" }}>
                                 <Card.Body>
-                                    <Card.Title>Order Summary</Card.Title>
+                                    <Card.Title className='text-center'><b>Order Summary</b></Card.Title>
                                     <ListGroup variant="flush">
-                                        <ListGroup.Item>
+                                        <ListGroup.Item variant='danger'>
                                             <Row>
-                                                <Col>Items</Col>
+                                                <Col><b>Items</b></Col>
                                                 <Col>${order.itemsPrice.toFixed(2)}</Col>
                                             </Row>
                                         </ListGroup.Item>
-                                        <ListGroup.Item>
+                                        <ListGroup.Item variant='danger'>
                                             <Row>
-                                                <Col>Shipping</Col>
+                                                <Col><b>Shipping</b></Col>
                                                 <Col>${order.shippingPrice.toFixed(2)}</Col>
                                             </Row>
                                         </ListGroup.Item>
-                                        <ListGroup.Item>
+                                        <ListGroup.Item variant='danger'>
                                             <Row>
-                                                <Col>Tax</Col>
+                                                <Col><b>Tax</b></Col>
                                                 <Col>${order.taxPrice.toFixed(2)}</Col>
                                             </Row>
                                         </ListGroup.Item>
-                                        <ListGroup.Item>
+                                        <ListGroup.Item variant='danger'>
                                             <Row>
                                                 <Col>
-                                                    <strong> Order Total</strong>
+                                                    <b>Order Total</b>
                                                 </Col>
                                                 <Col>
                                                     <strong>${order.totalPrice.toFixed(2)}</strong>

@@ -30,23 +30,23 @@ function Product(props) {
 
     return (
         <div>
-            <Card>
+            <Card bg="danger" border="dark">
                 <Link to={`/product/${props.product.slug}`}>
                     <img src={props.product.image} className="card-img-top" alt={props.product.name} />
                 </Link>
                 <Card.Body>
-                    <Link to={`/product/${props.product.slug}`}>
-                        <Card.Title>{props.product.name}</Card.Title>
+                    <Link to={`/product/${props.product.slug}`} style={{ textDecoration: 'none' }}>
+                        <Card.Title style={{ color: "yellow" }}>{props.product.name}</Card.Title>
                     </Link>
                     <Rating rating={props.product.rating} numReviews={props.product.numReviews} />
-                    <Card.Text><strong>{props.product.price}</strong></Card.Text>
+                    <Card.Text style={{ color: "black" }}>Price:<strong style={{ color: "yellow" }}>{props.product.price}</strong></Card.Text>
                     {props.product.countInStock === ((cartItems.find((x) => x._id === props.product._id)) ? (cartItems.find((x) => x._id === props.product._id)).quantity : 1) ?
-                        <Button variant='light' disabled>Out of stock</Button> :
+                        <Button variant="danger" disabled>Out of stock</Button> :
                         <Button className="btn btn-warning" onClick={() => addCartHandler(props.product)} >Add to cart</Button>
                     }
                 </Card.Body>
             </Card>
-        </div>
+        </div >
     )
 }
 

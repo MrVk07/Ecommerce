@@ -93,8 +93,7 @@ function App() {
                       <Link
                         className="dropdown-item"
                         to="#signout"
-                        onClick={signoutHandler}
-                      >
+                        onClick={signoutHandler}>
                         Sign Out
                       </Link>
                     </NavDropdown>) : (

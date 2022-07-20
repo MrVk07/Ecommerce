@@ -36,7 +36,7 @@ main {
 }
 
 .rating span {
-  color: #ffc000;
+  color: rgb(62, 48, 48);
 }
 
 .img-large {
@@ -89,4 +89,8 @@ main {
 
 .text-bold {
   font-weight: bold;
+}
+
+body {
+  background-color: #ffbf00;
 }
