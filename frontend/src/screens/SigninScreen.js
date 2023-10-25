@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import util from '../util'
+import { resolveAPI } from '../config';
 
 function SigninScreen() {
     const navigate = useNavigate()
@@ -22,7 +23,8 @@ function SigninScreen() {
     const submitHandler = async (e) => {
         e.preventDefault()
         try {
-            const { data } = await Axios.post('/api/users/signin', {
+            const url = resolveAPI("api/users/signin");
+            const { data } = await Axios.post(url, {
                 email,
                 password,
             })
@@ -42,7 +44,7 @@ function SigninScreen() {
 
 
     return (
-        <Container className="small-container">
+        <Container className="small-container" style={{ color: "black" }}>
             <Helmet>
                 <title>Sign In</title>
             </Helmet>
@@ -61,7 +63,7 @@ function SigninScreen() {
                 </div>
                 <div className="mb-3">
                     New customer?{' '}
-                    <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+                    <Link to={`/signup?redirect=${redirect}`} className='text-white'>Create your account</Link>
                 </div>
             </Form>
         </Container>

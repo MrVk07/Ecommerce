@@ -6,6 +6,7 @@ import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import util from '../util';
+import { resolveAPI } from '../config';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -35,17 +36,19 @@ export default function ProfileScreen() {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        if (password !== confirmPassword) {
+            toast.error('Password and confirm password do not match');
+            return;
+        }
+
+        dispatch({ type: 'UPDATE_REQUEST' });
+
         try {
+            const url = resolveAPI('api/users/profile');
             const { data } = await axios.put(
-                '/api/users/profile',
-                {
-                    name,
-                    email,
-                    password,
-                },
-                {
-                    headers: { Authorization: `Bearer ${userInfo.token}` },
-                }
+                url,
+                { name, email, password, },
+                { headers: { Authorization: `Bearer ${userInfo.token}` }, }
             );
             dispatch({
                 type: 'UPDATE_SUCCESS',
@@ -53,6 +56,7 @@ export default function ProfileScreen() {
             ctxDispatch({ type: 'USER_SIGNIN', payload: data });
             localStorage.setItem('userInfo', JSON.stringify(data));
             toast.success('User updated successfully');
+
         } catch (err) {
             dispatch({
                 type: 'FETCH_FAIL',

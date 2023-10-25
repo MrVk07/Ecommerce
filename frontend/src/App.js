@@ -31,6 +31,7 @@ import axios from "axios";
 import SearchBox from "./components/SearchBox";
 import SearchScreen from "./screens/SearchScreen";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { resolveAPI } from "./config";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store)
@@ -43,12 +44,15 @@ function App() {
     localStorage.removeItem('paymentMethod')
     window.location.href = '/signin'
   }
+
   const [sidebarIsOpen, setsidebarIsOpen] = useState(false)
   const [categories, setcategories] = useState([])
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get('/api/products/categories')
+        const url = resolveAPI("api/products/categories")
+        const { data } = await axios.get(url);
         setcategories(data)
       } catch (err) {
         toast.error(util(err))
@@ -139,9 +143,6 @@ function App() {
             </Routes>
           </Container>
         </main>
-        <footer>
-          <div className="text-center">All rights reserved</div>
-        </footer>
       </div>
     </Router>
   );
